@@ -23,9 +23,7 @@ class ShortUUIDTest < Minitest::Test
     alphabet = %w(a e i o u)
     1000.times do
       uuid = SecureRandom.uuid
-      p uuid
-      p ShortUUID.shorten(uuid, alphabet)
-      assert_equal uuid, ShortUUID.expand(ShortUUID.shorten(uuid))
+      assert_equal uuid, ShortUUID.expand(ShortUUID.shorten(uuid, alphabet), alphabet)
     end
   end
 end
