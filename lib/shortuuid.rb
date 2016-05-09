@@ -3,10 +3,12 @@ require 'radix'
 
 module ShortUUID
   def self.shorten(uuid, alphabet = Radix::BASE::B62)
+    return nil unless uuid && !uuid.empty?
     uuid.split('-').join.to_i(16).b(10).to_s(alphabet)
   end
 
   def self.expand(short_uuid, alphabet = Radix::BASE::B62)
+    return nil unless short_uuid && !short_uuid.empty?
     uuid = short_uuid.b(alphabet).to_i.to_s(16).rjust(32, '0')
     [
       uuid[0..7],

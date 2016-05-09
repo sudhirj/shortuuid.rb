@@ -26,4 +26,11 @@ class ShortUUIDTest < Minitest::Test
       assert_equal uuid, ShortUUID.expand(ShortUUID.shorten(uuid, alphabet), alphabet)
     end
   end
+
+  def test_error_handling
+    assert_nil ShortUUID.expand nil
+    assert_nil ShortUUID.shorten nil
+    assert_nil ShortUUID.expand ''
+    assert_nil ShortUUID.shorten ''
+  end
 end
