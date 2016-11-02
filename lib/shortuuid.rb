@@ -25,7 +25,7 @@ module ShortUUID
   def self.convert_alphabet_to_decimal(word, alphabet)
     num = 0
     radix = alphabet.length
-    word.chars.reverse.each_with_index do |char, index|
+    word.chars.to_a.reverse.each_with_index do |char, index|
       num += alphabet.index(char) * (radix**index)
     end
     num
