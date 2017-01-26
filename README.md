@@ -11,13 +11,16 @@ The default alphabet is a URL safe base62, as defined by
 ```
 irb(main):001:0> id = SecureRandom.uuid
 => "4890586e-32a5-4f9c-a000-2a2bb68eb1ce"
+
 irb(main):003:0> short_id = ShortUUID.shorten id
 => "2CvPdpytrcURpSLoPxYb30"
+
 irb(main):005:0> ShortUUID.expand short_id
 => "4890586e-32a5-4f9c-a000-2a2bb68eb1ce"
 
 irb(main):007:0> vowel_id = ShortUUID.shorten id, "AEIOU".chars
 => "EOOIAUUEOUUIOIIEUUUAOOUIOOUUAOIIIEAUAOUAAAOEOOEOAUAUUEE"
+
 irb(main):009:0> ShortUUID.expand vowel_id, "AEIOU".chars
 => "4890586e-32a5-4f9c-a000-2a2bb68eb1ce"
 ```
