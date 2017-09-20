@@ -1,5 +1,5 @@
 # ShortUUID
-Change
+
 Encode and decode UUIDs into any alphabet. Can either be used to improve space efficiency by using any alphabet with more than 16 characters, or any other alphabet for fun or profit.
 
 The default alphabet is a URL safe base62, as defined by
