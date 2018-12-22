@@ -4,7 +4,7 @@ Encode and decode UUIDs into any alphabet. Can either be used to improve space e
 
 The default alphabet is a URL safe base62, as defined by
 
-`DEFAULT_BASE62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`
+`DEFAULT_BASE62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'`
 
 ## Usage
 
