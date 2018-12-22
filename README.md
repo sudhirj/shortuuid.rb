@@ -59,7 +59,6 @@ irb(main):021:0> [a, b].map{|x| ShortUUID::encode(x)}
 => ["g", "UZHuMM7pZ"]
 irb(main):022:0> [a, b].map{|x| ShortUUID::encode(x).rjust(10, '0')}
 => ["000000000g", "0UZHuMM7pZ"]
-irb(main):023:0> 
 ```
 ## Installation
 
