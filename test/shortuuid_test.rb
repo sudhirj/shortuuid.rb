@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'securerandom'
 
@@ -23,7 +25,7 @@ class ShortUUIDTest < Minitest::Test
                'eaf186de-b255-42bf-8046-288e286e5799' => '79Ka7SqpMzbYobZdnAA1Cz',
                '1d152c86-c436-4d47-9269-006c7469b867' => 'ssS9A1oUhTFAbdjd6w93P' }.freeze
 
-  def test_that_it_has_a_version_number
+  def test_version_number
     refute_nil ::ShortUUID::VERSION
   end
 
@@ -40,7 +42,7 @@ class ShortUUIDTest < Minitest::Test
   end
 
   def test_custom_alphabet
-    alphabet = %w(a e i o u)
+    alphabet = %w[a e i o u]
     custom_examples = { '4f77f8d9-1c48-46d7-b477-693c2168a63a' =>
                           'euiiueioooiouuuueoeouooeiouaueieaeuiaoaeaiaeeuaoeeioeoo',
                         '53a8d1b9-4eca-4888-9b59-8fa91497857b' =>
@@ -53,13 +55,37 @@ class ShortUUIDTest < Minitest::Test
     end
   end
 
-  def test_reversal
-    assert_equal 0, ShortUUID.convert_alphabet_to_decimal('0', %w(0 1 2))
-    assert_equal 1, ShortUUID.convert_alphabet_to_decimal('1', %w(0 1 2))
-    assert_equal 2, ShortUUID.convert_alphabet_to_decimal('2', %w(0 1 2))
-    assert_equal 3, ShortUUID.convert_alphabet_to_decimal('10', %w(0 1 2))
-    assert_equal 4, ShortUUID.convert_alphabet_to_decimal('11', %w(0 1 2))
-    assert_equal 5, ShortUUID.convert_alphabet_to_decimal('12', %w(0 1 2))
+  def test_encode
+    assert_equal '0', ShortUUID.encode(0, %w[0 1 2])
+    assert_equal '1', ShortUUID.convert_decimal_to_alphabet(1, %w[0 1 2])
+    assert_equal '2', ShortUUID.convert_decimal_to_alphabet(2, %w[0 1 2])
+    assert_equal '10', ShortUUID.encode(3, %w[0 1 2])
+    assert_equal '11', ShortUUID.convert_decimal_to_alphabet(4, %w[0 1 2])
+    assert_equal '12', ShortUUID.convert_decimal_to_alphabet(5, %w[0 1 2])
+  end
+
+  def test_decode
+    assert_equal 0, ShortUUID.decode('0', %w[0 1 2])
+    assert_equal 1, ShortUUID.convert_alphabet_to_decimal('1', %w[0 1 2])
+    assert_equal 2, ShortUUID.convert_alphabet_to_decimal('2', %w[0 1 2])
+    assert_equal 3, ShortUUID.decode('10', %w[0 1 2])
+    assert_equal 4, ShortUUID.convert_alphabet_to_decimal('11', %w[0 1 2])
+    assert_equal 5, ShortUUID.convert_alphabet_to_decimal('12', %w[0 1 2])
+  end
+
+  def test_default_lexicographic_sort
+    1_000.times do
+      a = rand(1_000_000_000)
+      b = rand(1_000_000_000)
+      enc_a = ShortUUID.encode a
+      enc_b = ShortUUID.encode b
+      assert_equal a, ShortUUID.decode(enc_a)
+      assert_equal b, ShortUUID.decode(enc_b)
+      max_length = [enc_a.length, enc_b.length].max
+      enc_a_padded = enc_a.rjust(max_length, '0')
+      enc_b_padded = enc_b.rjust(max_length, '0')
+      assert_equal (a < b), (enc_a_padded < enc_b_padded)
+    end
   end
 
   def test_correctness
@@ -68,7 +94,7 @@ class ShortUUIDTest < Minitest::Test
       assert_equal uuid, ShortUUID.expand(ShortUUID.shorten(uuid))
     end
 
-    alphabet = %w(a e i o u)
+    alphabet = %w[a e i o u]
     1000.times do
       uuid = SecureRandom.uuid
       assert_equal uuid, ShortUUID.expand(ShortUUID.shorten(uuid, alphabet), alphabet)

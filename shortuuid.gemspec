@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Sudhir Jonathan']
   spec.email         = ['sudhir.j@gmail.com']
 
-  spec.summary       = 'Quickly and easily convert UUIDs to space efficient Base58 strings.'
+  spec.summary       = 'Quickly and easily convert UUIDs to space efficient Base62 strings.'
   spec.homepage      = 'https://github.com/sudhirj/shortuuid'
   spec.license       = 'MIT'
 
