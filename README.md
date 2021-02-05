@@ -1,6 +1,4 @@
 # ShortUUID
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsudhirj%2Fshortuuid.rb.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsudhirj%2Fshortuuid.rb?ref=badge_shield)
-
 
 Encode and decode UUIDs into any alphabet. Can either be used to improve space efficiency by using any alphabet with more than 16 characters, or any other alphabet for fun or profit.
 
@@ -87,7 +85,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/sudhir
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fsudhirj%2Fshortuuid.rb.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fsudhirj%2Fshortuuid.rb?ref=badge_large)
